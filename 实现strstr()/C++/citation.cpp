@@ -14,3 +14,7 @@ public:
         return -1;
     }
 };
+/* 利用两层嵌套循环，利用haystack的字符去匹配needle中的字符，
+如果和needle中第一个字符匹配，就匹配needle中下一个字符，
+如果不匹配，就用haystack中下一个字符匹配needle中第一个字符，
+依次类推*/
