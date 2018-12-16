@@ -1,0 +1,19 @@
+class Solution:
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        思路：从头开始逐个添加数组中各个元素求和，
+        初始最大和为0，当前和大于最大和的时候，把
+        当前和赋给最大和，当sum小于零的时候，把sum
+        置零，相当于重新开始计算子序和，返回最大的和
+        """
+        sum = 0 
+        maxsum = nums[0]
+        for i in range(len(nums)):
+            sum += nums[i]
+            if sum>maxsum:
+                maxsum = sum
+            if sum<0:
+                sum = 0
+        return maxsum
