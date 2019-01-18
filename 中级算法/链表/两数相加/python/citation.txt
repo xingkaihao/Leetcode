@@ -1,0 +1,42 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        思路：先判断l1和l2中是否有空的链表，如果没有
+        创建一个表头，并把表头赋给tmp，flag为进位指针，
+        执行循环，tmpsum为当前位置l1和l2和flag和，
+        用求余数和整除求当前位置的值和flag，用ListNode()
+        定义下一个节点，循环结束后，如果flag不为零，则再进
+        一位，返回tmp.next
+        """
+        if l1 is None:
+            return l2
+        if l2 is None:
+            return l1
+
+        res = ListNode(0)
+        tmp = res
+        flag = 0
+        while l1 or l2:
+            tmpsum = 0
+            if l1:
+                tmpsum = l1.val
+                l1 = l1.next
+            if l2:
+                tmpsum += l2.val
+                l2 = l2.next
+            tmpres = ((tmpsum + flag) % 10)
+            flag = ((tmpsum + flag) // 10)
+            res.next = ListNode(tmpres)
+            res = res.next
+        if flag:
+            res.next = ListNode(1)
+        return tmp.next
