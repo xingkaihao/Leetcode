@@ -1,0 +1,23 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        两个链表接在一起，无论谁在前，长度都是一样的，
+        执行循环，分别遍历链表A和B，将另一个链表接在后面，
+        如果两个链表存在交点，则交点之后节点相同，长度也相同，
+        所以两个接在一起的链表遍历到后一个链表的焦点处时，
+        节点相同
+        """
+        p1 = headA
+        p2 = headB
+        while(p1 != p2):
+            p1 = headB if p1 == None else p1.next
+            p2 = headA if p2 == None else p2.next
+        return p1
