@@ -1,0 +1,32 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def oddEvenList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        思路：首先排除链表长度小于3的情况，之后p为偶数位的链表，q为奇数位的链表，
+        首先确定奇偶位链表的表头，用t记录奇数位链表的表头，之后在循环中利用
+        p.next = p.next.next去除异位节点，注意循环中要判断q.next是否为空，
+        循环结束后，将偶数位链表和奇数位链表接在一起，末尾赋值为空，返回head
+        """
+        if head == None or head.next == None or head.next.next == None:
+            return head
+        
+        p = head.next  # 偶数位
+        q = head.next.next  # 奇数位
+        head.next = q
+        t = p  # 记录第一个偶数位
+        while q.next:
+            p.next = p.next.next
+            p = p.next
+            q.next = q.next.next
+            if q.next:  # 下一个奇数非空，才能进行赋值操作
+                q = q.next
+        q.next = t  # 连上第一个偶数位
+        p.next = None  # 偶数位最后一个连上None
+        return head
