@@ -1,0 +1,27 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, left, right, next):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        '''
+        思路：利用同时递归左右子树的方式，因为是完美二叉树，只要有左子树一定有右子树，
+        当左子树存在时，左子树指向右子树，当root.next存在时，root.right.next=root.next.left
+        否则root.right.next = None，之后分别递归root.left和root.right。
+        '''
+        if not root:
+            return
+        if root.left:
+            root.left.next = root.right
+            if root.next:
+                root.right.next = root.next.left
+            else:
+                root.right.next = None
+        self.connect(root.left)
+        self.connect(root.right)
+        return root
